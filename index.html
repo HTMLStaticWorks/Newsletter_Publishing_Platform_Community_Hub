@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkflow — Premium Newsletter Publishing & Community Platform</title>
+  <meta name="description" content="Design, write, distribute, and monetize your email newsletters and reader communities in a single premium workspace. Join the future of independent publishing.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg">
+  <style>
+    /* Unique Home Page Styles */
+    .hero-section {
+      padding-top: clamp(6rem, 10vw, 10rem);
+      padding-bottom: clamp(4rem, 8vw, 6rem);
+      text-align: center;
+      position: relative;
+      background: radial-gradient(circle at top, rgba(37, 99, 235, 0.05) 0%, rgba(248, 250, 252, 0) 70%);
+    }
+    [data-theme="dark"] .hero-section {
+      background: radial-gradient(circle at top, rgba(124, 58, 237, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: rgba(37, 99, 235, 0.08);
+      color: var(--color-primary);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    [data-theme="dark"] .hero-tagline {
+      background-color: rgba(124, 58, 237, 0.15);
+      color: var(--color-secondary);
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-illustration {
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-premium);
+      background-color: var(--color-card);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .hero-illustration::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+      pointer-events: none;
+    }
+
+    /* Social Proof & Stats */
+    .social-proof-section {
+      padding-block: 4rem;
+      border-block: 1px solid var(--color-border);
+      background-color: var(--color-card);
+    }
+    .social-proof-title {
+      text-align: center;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: 2.5rem;
+      font-weight: 600;
+    }
+    .stats-grid {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      text-align: center;
+    }
+    .stat-card {
+      padding: 1.5rem;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 580;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-weight: 500;
+      color: var(--color-text);
+      font-size: 1.1rem;
+    }
+
+    /* Workflow Pipeline */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.5rem;
+      position: relative;
+    }
+    .workflow-step {
+      position: relative;
+    }
+    .workflow-step::after {
+      content: '→';
+      position: absolute;
+      top: 2rem;
+      right: -1.25rem;
+      font-size: 1.5rem;
+      color: var(--color-border);
+      transform: translateY(-50%);
+    }
+    html[dir="rtl"] .workflow-step::after {
+      content: '←';
+      right: auto;
+      left: -1.25rem;
+    }
+    .workflow-step:last-child::after {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .workflow-step::after {
+        display: none;
+      }
+    }
+    .workflow-number {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background-color: var(--color-primary);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+    }
+    .workflow-step:nth-child(2) .workflow-number {
+      background-color: var(--color-secondary);
+      box-shadow: 0 4px 10px rgba(124, 58, 237, 0.2);
+    }
+    .workflow-step:nth-child(3) .workflow-number {
+      background-color: var(--color-accent);
+      box-shadow: 0 4px 10px rgba(6, 182, 212, 0.2);
+    }
+    .workflow-step:nth-child(4) .workflow-number {
+      background-color: var(--color-success);
+      box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+    }
+
+    /* Creator Profile Cards */
+    .creator-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .creator-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+    .creator-banner {
+      height: 120px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      position: relative;
+    }
+    .creator-avatar-container {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-full);
+      border: 4px solid var(--color-card);
+      position: absolute;
+      bottom: -40px;
+      left: 1.5rem;
+      overflow: hidden;
+      background-color: var(--color-bg);
+    }
+    html[dir="rtl"] .creator-avatar-container {
+      left: auto;
+      right: 1.5rem;
+    }
+    .creator-avatar-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .creator-info {
+      padding: 3rem 1.5rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .creator-meta {
+      display: flex;
+      gap: 1rem;
+      margin-block: 1rem;
+      font-size: 0.875rem;
+      color: var(--color-muted);
+      border-block: 1px solid var(--color-border);
+      padding-block: 0.5rem;
+    }
+
+    /* Newsletter CTA */
+    .glass-cta {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-cta::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: var(--radius-full);
+      background: radial-gradient(circle, var(--color-accent) 0%, rgba(6, 182, 212, 0) 70%);
+      top: -150px;
+      left: -150px;
+      opacity: 0.15;
+    }
+    .cta-input-group {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+      margin: 2rem auto 0;
+      background-color: var(--color-card);
+      padding: 0.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .cta-input-group .form-control {
+      border: none;
+      background: none;
+    }
+    .cta-input-group .form-control:focus {
+      box-shadow: none;
+    }
+    @media (max-width: 576px) {
+      .cta-input-group {
+        flex-direction: column;
+        background: none;
+        border: none;
+        padding: 0;
+        gap: 1rem;
+      }
+      .cta-input-group .form-control {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Backdrop for Mobile Drawer -->
+  <div class="backdrop"></div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky-header">
+    <div class="container flex-between">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+          <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563EB" />
+              <stop offset="1" stop-color="#7C3AED" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Inkflow</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="home2.html" class="nav-link">Home 2</a></li>
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="toggle-btn theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:20px; height:20px;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="toggle-btn rtl-toggle-btn" aria-label="Switch to RTL">
+          <svg class="rtl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+            <path d="M4 9h16M16 5l4 4-4 4" />
+            <path d="M20 15H4M8 11l-4 4 4 4" />
+          </svg>
+          <span class="rtl-label sr-only">AR</span>
+        </button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+
+        <!-- Hamburger Icon for Mobile -->
+        <div class="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer">
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link active">Home</a></li>
+      <li><a href="home2.html" class="mobile-drawer-link">Home 2</a></li>
+      <li><a href="features.html" class="mobile-drawer-link">Features</a></li>
+      <li><a href="pricing.html" class="mobile-drawer-link">Pricing</a></li>
+      <li><a href="about.html" class="mobile-drawer-link">About</a></li>
+      <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+      <li><a href="contact.html" class="mobile-drawer-link">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-actions">
+      <a href="dashboard.html" class="btn btn-secondary" style="width: 100%;">Dashboard</a>
+      <a href="signup.html" class="btn btn-primary" style="width: 100%;">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- SECTION 1: HERO BANNER -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content reveal">
+          <span class="hero-tagline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px; height:16px;">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            SaaS Creator Hub 2.0
+          </span>
+          <h1>Publish, Grow, and Monetize Your Audience</h1>
+          <p class="hero-subtitle">
+            The complete platform for modern independent writers, creators, and publishers. Run your email newsletter, subscriber community, and paid subscriptions in one beautiful SaaS workspace.
+          </p>
+          <div class="hero-actions">
+            <a href="signup.html" class="btn btn-primary">Start Publishing Free</a>
+            <a href="features.html" class="btn btn-secondary">Explore Features</a>
+          </div>
+        </div>
+
+        <!-- Inline SVG Dashboard Graphic (Hero Mockup) -->
+        <div class="hero-illustration reveal-scale">
+          <svg viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: var(--radius-md); box-shadow: var(--shadow-sm); background-color: var(--color-bg); width: 100%;">
+            <!-- Header bar -->
+            <rect width="960" height="40" fill="var(--color-card)" />
+            <circle cx="20" cy="20" r="6" fill="#EF4444" />
+            <circle cx="40" cy="20" r="6" fill="#F59E0B" />
+            <circle cx="60" cy="20" r="6" fill="#22C55E" />
+            <rect x="120" y="10" width="400" height="20" rx="10" fill="var(--color-border)" />
+            <!-- Main Content Area -->
+            <!-- Sidebar -->
+            <rect y="40" width="180" height="500" fill="var(--color-card)" />
+            <rect x="20" y="70" width="140" height="20" rx="4" fill="var(--color-primary)" opacity="0.1" />
+            <rect x="35" y="75" width="80" height="10" rx="2" fill="var(--color-primary)" />
+            <rect x="20" y="110" width="140" height="15" rx="4" fill="var(--color-border)" />
+            <rect x="20" y="145" width="140" height="15" rx="4" fill="var(--color-border)" />
+            <rect x="20" y="180" width="140" height="15" rx="4" fill="var(--color-border)" />
+            <rect x="20" y="215" width="140" height="15" rx="4" fill="var(--color-border)" />
+            <!-- Charts and Workspace -->
+            <!-- Left Card: Editor panel -->
+            <rect x="200" y="60" width="380" height="460" rx="8" fill="var(--color-card)" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.03))" />
+            <rect x="220" y="80" width="150" height="16" rx="4" fill="var(--color-text)" />
+            <rect x="220" y="110" width="340" height="8" rx="4" fill="var(--color-muted)" opacity="0.6" />
+            <rect x="220" y="125" width="280" height="8" rx="4" fill="var(--color-muted)" opacity="0.6" />
+            <!-- Interactive elements visual -->
+            <rect x="220" y="150" width="120" height="120" rx="6" fill="url(#heroWidgetGrad)" />
+            <rect x="360" y="150" width="200" height="20" rx="4" fill="var(--color-border)" />
+            <rect x="360" y="180" width="200" height="10" rx="4" fill="var(--color-muted)" opacity="0.6" />
+            <rect x="360" y="200" width="180" height="10" rx="4" fill="var(--color-muted)" opacity="0.6" />
+            
+            <rect x="220" y="290" width="340" height="200" rx="6" fill="var(--color-bg)" />
+            <text x="240" y="325" font-family="system-ui" font-size="12" font-weight="600" fill="var(--color-text)">Type '/' to insert blocks</text>
+            <rect x="240" y="345" width="300" height="1" fill="var(--color-border)" />
+            <!-- Right Card: Analytics -->
+            <rect x="600" y="60" width="340" height="210" rx="8" fill="var(--color-card)" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.03))" />
+            <text x="620" y="90" font-family="system-ui" font-size="14" font-weight="600" fill="var(--color-text)">Subscriber Growth</text>
+            <rect x="620" y="110" width="60" height="10" rx="4" fill="var(--color-primary)" opacity="0.2" />
+            <!-- Chart line simulation -->
+            <path d="M 620 220 Q 670 190 720 160 T 820 140 T 920 100" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" />
+            <circle cx="920" cy="100" r="5" fill="var(--color-primary)" />
+            
+            <!-- Bottom Right Card: Monetization details -->
+            <rect x="600" y="290" width="340" height="230" rx="8" fill="var(--color-card)" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.03))" />
+            <text x="620" y="320" font-family="system-ui" font-size="14" font-weight="600" fill="var(--color-text)">Monthly Recurring Revenue</text>
+            <text x="620" y="355" font-family="system-ui" font-size="28" font-weight="700" fill="var(--color-success)">$12,480.00</text>
+            <rect x="620" y="375" width="300" height="60" rx="6" fill="var(--color-bg)" />
+            <text x="635" y="410" font-family="system-ui" font-size="12" fill="var(--color-muted)">Annual Growth Rate</text>
+            <text x="860" y="410" font-family="system-ui" font-size="12" font-weight="600" fill="var(--color-success)">+142%</text>
+            <rect x="620" y="450" width="140" height="15" rx="4" fill="var(--color-secondary)" opacity="0.1" />
+            <rect x="780" y="450" width="140" height="15" rx="4" fill="var(--color-accent)" opacity="0.1" />
+
+            <defs>
+              <linearGradient id="heroWidgetGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="var(--color-primary)" />
+                <stop offset="1" stop-color="var(--color-accent)" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: TRUSTED BY & STATISTICS -->
+    <section class="social-proof-section">
+      <div class="container">
+        <h2 class="social-proof-title">Trusted by industry-leading creators & publications</h2>
+        <div class="marquee-container reveal">
+          <div class="marquee-content">
+            <!-- Logos -->
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Notion</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Vercel</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Stripe</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Linear</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Framer</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">GitHub</text></svg>
+            <!-- Duplicate for infinite effect -->
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Notion</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Vercel</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Stripe</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Linear</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">Framer</text></svg>
+            <svg viewBox="0 0 100 40" style="width:100px; height:40px;"><text x="0" y="25" font-family="sans-serif" font-weight="bold" font-size="20">GitHub</text></svg>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <div class="stat-number counter-val" data-target="10" data-suffix="M+">0</div>
+            <div class="stat-label">Active Subscribers</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-number counter-val" data-target="50" data-suffix="M+">0</div>
+            <div class="stat-label">Paid to Creators</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-number counter-val" data-target="99" data-suffix=".9%">0</div>
+            <div class="stat-label">Email Deliverability</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-number counter-val" data-target="50" data-suffix="K+">0</div>
+            <div class="stat-label">Active Newsletters</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FEATURED CATEGORIES -->
+    <section class="section-spacing">
+      <div class="container text-center">
+        <h2 class="reveal">Explore Top Publishing Categories</h2>
+        <p class="reveal" style="max-width: 600px; margin: 1rem auto 3rem;">
+          Connect with readers across diverse niches. Build community around topics you're passionate about.
+        </p>
+        <div class="grid-3 card-equal-height-grid">
+          <!-- Card 1 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Technology" loading="lazy">
+              </div>
+              <h3>Technology</h3>
+              <p style="margin-top:0.75rem;">AI developments, SaaS guides, software engineering tips, and gadgets review.</p>
+            </div>
+            <a href="signup.html" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Create Tech Blog</a>
+          </div>
+          <!-- Card 2 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Business & Finance" loading="lazy">
+              </div>
+              <h3>Business & Finance</h3>
+              <p style="margin-top:0.75rem;">Market analysis, startup strategies, personal financial advices, and investment trends.</p>
+            </div>
+            <a href="signup.html" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Write Business</a>
+          </div>
+          <!-- Card 3 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Design & Creativity" loading="lazy">
+              </div>
+              <h3>Design & Creativity</h3>
+              <p style="margin-top:0.75rem;">User interfaces, web design systems, copywriting guidelines, and digital art guides.</p>
+            </div>
+            <a href="signup.html" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Create Portfolio</a>
+          </div>
+          <!-- Card 4 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=600&q=80" alt="Lifestyle & Health" loading="lazy">
+              </div>
+              <h3>Lifestyle & Health</h3>
+              <p style="margin-top:0.75rem;">Fitness routines, organic nutrition, mental health topics, and travel logs.</p>
+            </div>
+            <a href="signup.html" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Start Lifestyle</a>
+          </div>
+          <!-- Card 5 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" alt="Growth & Marketing" loading="lazy">
+              </div>
+              <h3>Growth & Marketing</h3>
+              <p style="margin-top:0.75rem;">SEO algorithms, customer acquisition hacks, paid ads systems, and email funnels.</p>
+            </div>
+            <a href="signup.html" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Write Marketing</a>
+          </div>
+          <!-- Card 6 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Science & Culture" loading="lazy">
+              </div>
+              <h3>Science & Culture</h3>
+              <p style="margin-top:0.75rem;">Global sociology, history lessons, cosmological space news, and biology essays.</p>
+            </div>
+            <a href="signup.html" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Launch Science</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: WHY CHOOSE US -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="grid-2" style="align-items: center; margin-bottom: 4rem;">
+          <div class="reveal-left">
+            <h2>Why Publishers Choose Inkflow Over Competitors</h2>
+          </div>
+          <div class="reveal-right">
+            <p>We combine elements of modern CMS systems with powerful marketing email pipelines. Build beautiful landing pages, write clean issues, charge subscriptions, and keep 100% control of your customer data.</p>
+          </div>
+        </div>
+
+        <div class="grid-3 card-equal-height-grid">
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Distraction-Free Editor" loading="lazy">
+              </div>
+              <h3>Distraction-Free Editor</h3>
+              <p style="margin-top:0.75rem;">Write natively in Markdown with rich embeds, layout formatting presets, and smart spelling auto-optimizations.</p>
+            </div>
+            <a href="features.html" class="text-gradient-primary" style="font-weight:600; margin-top:1.5rem; display:inline-flex; align-items:center; gap:0.25rem;">Learn about editor <span class="rtl-icon-flip">→</span></a>
+          </div>
+
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Granular Analytics" loading="lazy">
+              </div>
+              <h3>Granular Analytics</h3>
+              <p style="margin-top:0.75rem;">Track real open rates, user clicking heatmaps, unsubscribe causes, referral sources, and subscription values.</p>
+            </div>
+            <a href="features.html" class="text-gradient-primary" style="font-weight:600; margin-top:1.5rem; display:inline-flex; align-items:center; gap:0.25rem;">Explore reporting <span class="rtl-icon-flip">→</span></a>
+          </div>
+
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80" alt="Paid Memberships" loading="lazy">
+              </div>
+              <h3>Paid Memberships</h3>
+              <p style="margin-top:0.75rem;">Receive direct Stripe payments, design custom tiers, coupon keys, and keep 96.5% of your revenues.</p>
+            </div>
+            <a href="features.html" class="text-gradient-primary" style="font-weight:600; margin-top:1.5rem; display:inline-flex; align-items:center; gap:0.25rem;">See integrations <span class="rtl-icon-flip">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PUBLISHING WORKFLOW -->
+    <section class="section-spacing">
+      <div class="container">
+        <h2 class="text-center reveal" style="margin-bottom: 4rem;">From Idea to Inbox in 4 Steps</h2>
+        <div class="workflow-grid">
+          <div class="workflow-step reveal">
+            <div class="workflow-number">1</div>
+            <h4>Draft in Editor</h4>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem;">Compose your thoughts in our lightning-fast editor. Add layout sections and widgets easily.</p>
+          </div>
+          <div class="workflow-step reveal">
+            <div class="workflow-number">2</div>
+            <h4>A/B Test Subjects</h4>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem;">Optimize open rates by sending automated subject tests to a segment of subscribers.</p>
+          </div>
+          <div class="workflow-step reveal">
+            <div class="workflow-number">3</div>
+            <h4>Distribute Everywhere</h4>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem;">Deploy your issue to emails, web dashboards, RSS feeds, and social platforms automatically.</p>
+          </div>
+          <div class="workflow-step reveal">
+            <div class="workflow-number">4</div>
+            <h4>Scale Monetization</h4>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem;">Analyze engagement reports, target new sponsors, and set up paywalls for your premium content.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FEATURED CREATORS -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 4rem;">
+          <h2 class="reveal">Built by Creators, for Creators</h2>
+          <p class="reveal" style="max-width: 600px; margin: 1rem auto 0;">Meet some of the top-performing publications growing their businesses on Inkflow.</p>
+        </div>
+
+        <div class="grid-3 card-equal-height-grid">
+          <!-- Creator 1 -->
+          <div class="creator-card reveal">
+            <div class="creator-banner" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">
+              <div class="creator-avatar-container">
+                <img src="assets/image/alex_rivera_avatar.png" alt="Alex Rivera Avatar">
+              </div>
+            </div>
+            <div class="creator-info">
+              <div>
+                <h3 style="font-size: 1.25rem;">Alex Rivera</h3>
+                <p style="font-size: 0.875rem; color: var(--color-primary); font-weight: 600;">Editor, The Tech Pulse</p>
+                <p style="margin-top: 0.75rem; font-size: 0.95rem;">Weekly analysis on the business models behind modern generative artificial intelligence.</p>
+              </div>
+              <div>
+                <div class="creator-meta">
+                  <div><strong>124K</strong> Subs</div>
+                  <div><strong>48%</strong> Open Rate</div>
+                  <div><strong>Tech</strong></div>
+                </div>
+                <a href="signup.html" class="btn btn-secondary" style="width: 100%; padding-block: 0.6rem;">Subscribe</a>
+              </div>
+            </div>
+          </div>
+          <!-- Creator 2 -->
+          <div class="creator-card reveal">
+            <div class="creator-banner" style="background: linear-gradient(135deg, #7C3AED, #5B21B6);">
+              <div class="creator-avatar-container">
+                <img src="assets/image/sarah_jenkins_avatar.png" alt="Sarah Jenkins Avatar">
+              </div>
+            </div>
+            <div class="creator-info">
+              <div>
+                <h3 style="font-size: 1.25rem;">Sarah Jenkins</h3>
+                <p style="font-size: 0.875rem; color: var(--color-secondary); font-weight: 600;">Editor, Capitalist Growth</p>
+                <p style="margin-top: 0.75rem; font-size: 0.95rem;">Actionable startup scaling tactics, operations blueprints, and bootstrap growth systems.</p>
+              </div>
+              <div>
+                <div class="creator-meta">
+                  <div><strong>85K</strong> Subs</div>
+                  <div><strong>52%</strong> Open Rate</div>
+                  <div><strong>Finance</strong></div>
+                </div>
+                <a href="signup.html" class="btn btn-secondary" style="width: 100%; padding-block: 0.6rem;">Subscribe</a>
+              </div>
+            </div>
+          </div>
+          <!-- Creator 3 -->
+          <div class="creator-card reveal">
+            <div class="creator-banner" style="background: linear-gradient(135deg, #06B6D4, #0891B2);">
+              <div class="creator-avatar-container">
+                <img src="assets/image/koji_tanaka_avatar.png" alt="Koji Tanaka Avatar">
+              </div>
+            </div>
+            <div class="creator-info">
+              <div>
+                <h3 style="font-size: 1.25rem;">Koji Tanaka</h3>
+                <p style="font-size: 0.875rem; color: var(--color-accent); font-weight: 600;">Editor, Minimalist Life</p>
+                <p style="margin-top: 0.75rem; font-size: 0.95rem;">Finding peace in a hyper-connected world. Essays on zen gardens, tea, and typography.</p>
+              </div>
+              <div>
+                <div class="creator-meta">
+                  <div><strong>45K</strong> Subs</div>
+                  <div><strong>58%</strong> Open Rate</div>
+                  <div><strong>Lifestyle</strong></div>
+                </div>
+                <a href="signup.html" class="btn btn-secondary" style="width: 100%; padding-block: 0.6rem;">Subscribe</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: TESTIMONIALS -->
+    <section class="section-spacing">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 4rem;">
+          <h2 class="reveal">Loved by Creators Worldwide</h2>
+          <p class="reveal" style="max-width: 600px; margin: 1rem auto 0;">See how switching to Inkflow has supercharged engagement for independent publishers.</p>
+        </div>
+
+        <div class="grid-3 card-equal-height-grid">
+          <!-- Card 1 -->
+          <div class="premium-card reveal" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <div style="color: var(--color-primary); opacity: 0.2; margin-bottom: 1.5rem;">
+                <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              <p style="font-size: 1.05rem; line-height: 1.6; font-style: italic; color: var(--color-text); margin-bottom: 2rem;">
+                "We migrated 50,000 subscribers from Substack in 10 minutes. The dashboard experience is incredibly clean, and the transaction fees are practically zero. Highly recommended."
+              </p>
+            </div>
+            <div style="margin-top: auto; display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+              <img src="assets/image/alex_rivera_avatar.png" alt="Alex Rivera" style="width: 48px; height: 48px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid var(--color-primary); flex-shrink: 0;">
+              <div>
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-text);">Alex Rivera</h4>
+                <p style="font-size: 0.85rem; color: var(--color-muted);">Creator, Tech Chronicles</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="premium-card reveal" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <div style="color: var(--color-secondary); opacity: 0.2; margin-bottom: 1.5rem;">
+                <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              <p style="font-size: 1.05rem; line-height: 1.6; font-style: italic; color: var(--color-text); margin-bottom: 2rem;">
+                "The visual editor allows us to embed direct subscriber widgets and custom CSS layouts without write limits. Our open rates jumped from 32% to 46% within the first month."
+              </p>
+            </div>
+            <div style="margin-top: auto; display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+              <img src="assets/image/elena_rostova_avatar.png" alt="Elena Rostova" style="width: 48px; height: 48px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid var(--color-secondary); flex-shrink: 0;">
+              <div>
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-text);">Elena Rostova</h4>
+                <p style="font-size: 0.85rem; color: var(--color-muted);">Founder, Elena's Letters</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="premium-card reveal" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <div style="color: var(--color-accent); opacity: 0.2; margin-bottom: 1.5rem;">
+                <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              <p style="font-size: 1.05rem; line-height: 1.6; font-style: italic; color: var(--color-text); margin-bottom: 2rem;">
+                "Inkflow's referral system is incredibly built. Our audience shares our content, automatically unlocks premium issues, and drives new readers without us spending on paid ads."
+              </p>
+            </div>
+            <div style="margin-top: auto; display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+              <img src="assets/image/marcus_aurel_avatar.png" alt="Marcus Aurel" style="width: 48px; height: 48px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid var(--color-accent); flex-shrink: 0;">
+              <div>
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--color-text);">Marcus Aurel</h4>
+                <p style="font-size: 0.85rem; color: var(--color-muted);">Lead Editor, Stoic Musings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: NEWSLETTER CTA -->
+    <section class="section-spacing" style="padding-top: 0;">
+      <div class="container">
+        <div class="glass-cta reveal">
+          <h2>Ready to Launch Your Premium Publication?</h2>
+          <p style="max-width: 600px; margin: 1rem auto 0;">Start writing today. No setup fees, no credit card required. Cancel anytime.</p>
+          <div class="cta-input-group">
+            <input type="email" class="form-control" placeholder="Enter your email address" aria-label="Email Address">
+            <button class="btn btn-primary" type="button">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px;">
+              <rect width="32" height="32" rx="8" fill="url(#footerLogoGrad)" />
+              <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB" />
+                  <stop offset="1" stop-color="#7C3AED" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Inkflow</span>
+          </a>
+          <p style="font-size: 0.9rem;">Modern independent publishing software and community management engine.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-icon" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="features.html" class="footer-link">Features</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing</a></li>
+            <li><a href="home2.html" class="footer-link">Integrations</a></li>
+            <li><a href="#" class="footer-link">Changelog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="about.html" class="footer-link">Creators Guides</a></li>
+            <li><a href="#" class="footer-link">Status Page</a></li>
+            <li><a href="#" class="footer-link">API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Stay Connected</h4>
+          <p style="font-size: 0.875rem; margin-bottom: 1rem;">Receive creator tactics directly in your inbox.</p>
+          <div class="footer-newsletter">
+            <input type="email" class="form-control" placeholder="your@email.com" aria-label="Newsletter email">
+            <button class="btn btn-primary" type="button">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Inkflow, Inc. All rights reserved.</p>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Privacy Policy</a>
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

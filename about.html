@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkflow — Our Mission & Core Values</title>
+  <meta name="description" content="Meet the team behind Inkflow and learn about our mission to empower independent creators and writers worldwide.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg">
+  <style>
+    /* About Us Unique Styles */
+    .about-hero {
+      padding-top: clamp(6rem, 10vw, 9rem);
+      padding-bottom: clamp(3rem, 6vw, 4rem);
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.05) 0%, rgba(248, 250, 252, 0) 70%);
+    }
+    [data-theme="dark"] .about-hero {
+      background: radial-gradient(circle at top, rgba(6, 182, 212, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+    }
+
+    /* Team profiles custom styles */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .team-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+    .team-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: var(--radius-full);
+      background-color: var(--color-bg);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border: 3px solid var(--color-border);
+    }
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Milestone timeline visual */
+    .timeline-container {
+      position: relative;
+      max-width: 800px;
+      margin: 3rem auto 0;
+      padding-inline-start: 2rem;
+    }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 7px;
+      width: 2px;
+      background-color: var(--color-border);
+    }
+    html[dir="rtl"] .timeline-container {
+      padding-inline-start: 0;
+      padding-inline-end: 2rem;
+    }
+    html[dir="rtl"] .timeline-container::before {
+      left: auto;
+      right: 7px;
+    }
+    .timeline-node {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    .timeline-node::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: var(--radius-full);
+      background-color: var(--color-primary);
+      border: 3px solid var(--color-card);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    html[dir="rtl"] .timeline-node::before {
+      left: auto;
+      right: -28px;
+    }
+    .timeline-year {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Backdrop -->
+  <div class="backdrop"></div>
+
+  <!-- HEADER -->
+  <header class="sticky-header">
+    <div class="container flex-between">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+          <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563EB" />
+              <stop offset="1" stop-color="#7C3AED" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Inkflow</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="home2.html" class="nav-link">Home 2</a></li>
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="toggle-btn theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:20px; height:20px;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="toggle-btn rtl-toggle-btn" aria-label="Switch to RTL">
+          <svg class="rtl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+            <path d="M4 9h16M16 5l4 4-4 4" />
+            <path d="M20 15H4M8 11l-4 4 4 4" />
+          </svg>
+          <span class="rtl-label sr-only">AR</span>
+        </button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+
+        <!-- Hamburger Icon for Mobile -->
+        <div class="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer">
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+      <li><a href="home2.html" class="mobile-drawer-link">Home 2</a></li>
+      <li><a href="features.html" class="mobile-drawer-link">Features</a></li>
+      <li><a href="pricing.html" class="mobile-drawer-link">Pricing</a></li>
+      <li><a href="about.html" class="mobile-drawer-link active">About</a></li>
+      <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+      <li><a href="contact.html" class="mobile-drawer-link">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-actions">
+      <a href="dashboard.html" class="btn btn-secondary" style="width: 100%;">Dashboard</a>
+      <a href="signup.html" class="btn btn-primary" style="width: 100%;">Sign Up</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- SECTION 1: ABOUT HERO -->
+    <section class="about-hero">
+      <div class="container">
+        <h1 class="reveal">Democratizing Independent Media</h1>
+        <p style="max-width: 600px; margin: 1.5rem auto 0;" class="reveal">
+          We build tools that empower writers to own their relationship with their readers directly.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OUR STORY -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container grid-2" style="align-items: center;">
+        <div class="reveal-left">
+          <h2>Writers Deserve Better Infrastructure</h2>
+          <p style="margin-top:1.5rem;">
+            Inkflow was founded in 2024 by a small team of journalists and software designers who grew tired of fragmented web technologies. Writers were forced to cobble together billing plugins, design builders, and subscriber tables just to distribute a weekly PDF link.
+          </p>
+          <p style="margin-top:1rem;">
+            We decided to create a single cohesive platform. An integrated editor, responsive delivery engine, custom domains, and integrated discussion threads. Simple, fast, and secure.
+          </p>
+        </div>
+        <div class="reveal-right">
+          <!-- Styled SVG representing origins/collaboration -->
+          <svg viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: var(--radius-md); background-color: var(--color-bg); width: 100%;">
+            <rect x="50" y="50" width="350" height="200" rx="12" fill="var(--color-card)" stroke="var(--color-border)" stroke-width="2" />
+            <circle cx="100" cy="100" r="20" fill="var(--color-primary)" opacity="0.1" />
+            <path d="M95 100 L105 100 M100 95 L100 105" stroke="var(--color-primary)" stroke-width="2" />
+            <text x="140" y="105" font-family="system-ui" font-size="14" font-weight="600" fill="var(--color-text)">Built with Passion</text>
+            
+            <circle cx="100" cy="180" r="20" fill="var(--color-secondary)" opacity="0.1" />
+            <path d="M90 180 Q100 170 110 180" fill="none" stroke="var(--color-secondary)" stroke-width="2" />
+            <text x="140" y="185" font-family="system-ui" font-size="14" font-weight="600" fill="var(--color-text)">Creator Ownership</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: MISSION & VISION -->
+    <section class="section-spacing">
+      <div class="container grid-2">
+        <div class="premium-card reveal">
+          <div>
+            <div class="card-illustration">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Mission" loading="lazy">
+            </div>
+            <h3>Our Mission</h3>
+            <p style="margin-top:1rem;">
+              To provide independent voices with the premium technical utilities needed to escape advertising algorithms, run sustainable businesses, and gather tight communities.
+            </p>
+          </div>
+        </div>
+        <div class="premium-card reveal">
+          <div>
+            <div class="card-illustration">
+              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Vision" loading="lazy">
+            </div>
+            <h3>Our Vision</h3>
+            <p style="margin-top:1rem;">
+              A media landscape where content quality is prioritized, subscription relationships are transparent, and writers own 100% of their database archives.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CORE VALUES -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container text-center">
+        <h2 class="reveal" style="margin-bottom: 4rem;">Core Values Driving Inkflow</h2>
+        <div class="grid-3 card-equal-height-grid">
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80" alt="Creator First" loading="lazy">
+              </div>
+              <h3>Creator First</h3>
+              <p style="margin-top:0.5rem;">We prioritize features that improve writing ergonomics and subscriber revenue retention.</p>
+            </div>
+          </div>
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="assets/image/Radical Simplicity.png" alt="Simplicity" loading="lazy">
+              </div>
+              <h3>Radical Simplicity</h3>
+              <p style="margin-top:0.5rem;">No visual clutter. We keep settings panels simple and build components that work instantly.</p>
+            </div>
+          </div>
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Security" loading="lazy">
+              </div>
+              <h3>Extreme Security</h3>
+              <p style="margin-top:0.5rem;">DKIM settings, automated spam blockers, and SSL controls protect reader lists securely.</p>
+            </div>
+          </div>
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80" alt="Portability" loading="lazy">
+              </div>
+              <h3>Data Portability</h3>
+              <p style="margin-top:0.5rem;">Export your subscriber databases, posts history, and billing records in one click anytime.</p>
+            </div>
+          </div>
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=600&q=80" alt="Reliable Delivery" loading="lazy">
+              </div>
+              <h3>Reliable Delivery</h3>
+              <p style="margin-top:0.5rem;">We route issues using premium SMTP server pools to maximize email folder hits.</p>
+            </div>
+          </div>
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1526253038957-bce54e05968e?auto=format&fit=crop&w=600&q=80" alt="No Lock-in" loading="lazy">
+              </div>
+              <h3>Zero Platform Lock-in</h3>
+              <p style="margin-top:0.5rem;">You point DNS to our servers, keeping full search engine authority for your articles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: MEET THE TEAM -->
+    <section class="section-spacing">
+      <div class="container">
+        <h2 class="text-center reveal" style="margin-bottom: 4rem;">Meet the Founders & Builders</h2>
+        <div class="team-grid">
+          <!-- Person 1 -->
+          <div class="team-card reveal">
+            <div class="team-avatar">
+              <img src="assets/image/marcus_aurel_avatar.png" alt="Marcus Aurel">
+            </div>
+            <h3>Marcus Aurel</h3>
+            <p style="font-size:0.9rem; color:var(--color-primary); font-weight:600; margin-bottom:0.75rem;">Co-Founder & CEO</p>
+            <p style="font-size:0.95rem;">Former media director. Marcus guides product direction and business operations.</p>
+          </div>
+          <!-- Person 2 -->
+          <div class="team-card reveal">
+            <div class="team-avatar">
+              <img src="assets/image/elena_rostova_avatar.png" alt="Elena Rostova">
+            </div>
+            <h3>Elena Rostova</h3>
+            <p style="font-size:0.9rem; color:var(--color-secondary); font-weight:600; margin-bottom:0.75rem;">Co-Founder & CTO</p>
+            <p style="font-size:0.95rem;">Wrote original core parser. Elena directs database pipelines and system architectures.</p>
+          </div>
+          <!-- Person 3 -->
+          <div class="team-card reveal">
+            <div class="team-avatar">
+              <img src="assets/image/kenji_tanaka_avatar.png" alt="Kenji Tanaka">
+            </div>
+            <h3>Kenji Tanaka</h3>
+            <p style="font-size:0.9rem; color:var(--color-accent); font-weight:600; margin-bottom:0.75rem;">Lead Designer</p>
+            <p style="font-size:0.95rem;">UX specialist. Kenji manages layout rules and responsive styling architectures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: ACHIEVEMENTS & TIMELINE -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container">
+        <h2 class="text-center reveal" style="margin-bottom: 4rem;">Platform Milestones & History</h2>
+        
+        <div class="timeline-container reveal">
+          <div class="timeline-node">
+            <div class="timeline-year">2024</div>
+            <h4>Inkflow Platform Formed</h4>
+            <p style="margin-top:0.5rem; font-size:0.95rem;">Launched our initial markdown editor and primary Stripe integrations to a closed beta of 500 writers.</p>
+          </div>
+
+          <div class="timeline-node">
+            <div class="timeline-year">2025</div>
+            <h4>Viral Referral Engines Built</h4>
+            <p style="margin-top:0.5rem; font-size:0.95rem;">Introduced native recommendation tools and list growth referral systems. Platform hit 1M+ active readers globally.</p>
+          </div>
+
+          <div class="timeline-node">
+            <div class="timeline-year">2026</div>
+            <h4>Community Discussion Boards Launch</h4>
+            <p style="margin-top:0.5rem; font-size:0.95rem;">Unleashed integrated thread conversations (Community Hub) and DKIM automated DNS security layers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px;">
+              <rect width="32" height="32" rx="8" fill="url(#footerLogoGrad)" />
+              <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB" />
+                  <stop offset="1" stop-color="#7C3AED" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Inkflow</span>
+          </a>
+          <p style="font-size: 0.9rem;">Modern independent publishing software and community management engine.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-icon" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="features.html" class="footer-link">Features</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing</a></li>
+            <li><a href="home2.html" class="footer-link">Integrations</a></li>
+            <li><a href="#" class="footer-link">Changelog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="about.html" class="footer-link">Creators Guides</a></li>
+            <li><a href="#" class="footer-link">Status Page</a></li>
+            <li><a href="#" class="footer-link">API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Stay Connected</h4>
+          <p style="font-size: 0.875rem; margin-bottom: 1rem;">Receive creator tactics directly in your inbox.</p>
+          <div class="footer-newsletter">
+            <input type="email" class="form-control" placeholder="your@email.com" aria-label="Newsletter email">
+            <button class="btn btn-primary" type="button">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Inkflow, Inc. All rights reserved.</p>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Privacy Policy</a>
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkflow — Contact Sales & Support</title>
+  <meta name="description" content="Get in touch with Inkflow's creator advisors, corporate sales department, or customer support experts.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg">
+  <style>
+    /* Contact Page Unique Styles */
+    .contact-hero {
+      padding-top: clamp(6rem, 10vw, 9rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(6, 182, 212, 0.05) 0%, rgba(248, 250, 252, 0) 70%);
+    }
+    [data-theme="dark"] .contact-hero {
+      background: radial-gradient(circle at top, rgba(124, 58, 237, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-wrapper {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      padding: 3rem;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Backdrop -->
+  <div class="backdrop"></div>
+
+  <!-- HEADER -->
+  <header class="sticky-header">
+    <div class="container flex-between">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+          <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563EB" />
+              <stop offset="1" stop-color="#7C3AED" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Inkflow</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="home2.html" class="nav-link">Home 2</a></li>
+          <li><a href="features.html" class="nav-link">Features</a></li>
+          <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="toggle-btn theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:20px; height:20px;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="toggle-btn rtl-toggle-btn" aria-label="Switch to RTL">
+          <svg class="rtl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+            <path d="M4 9h16M16 5l4 4-4 4" />
+            <path d="M20 15H4M8 11l-4 4 4 4" />
+          </svg>
+          <span class="rtl-label sr-only">AR</span>
+        </button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+
+        <!-- Hamburger Icon for Mobile -->
+        <div class="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer">
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+      <li><a href="home2.html" class="mobile-drawer-link">Home 2</a></li>
+      <li><a href="features.html" class="mobile-drawer-link">Features</a></li>
+      <li><a href="pricing.html" class="mobile-drawer-link">Pricing</a></li>
+      <li><a href="about.html" class="mobile-drawer-link">About</a></li>
+      <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+      <li><a href="contact.html" class="mobile-drawer-link active">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-actions">
+      <a href="dashboard.html" class="btn btn-secondary" style="width: 100%;">Dashboard</a>
+      <a href="signup.html" class="btn btn-primary" style="width: 100%;">Sign Up</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- SECTION 1: HERO -->
+    <section class="contact-hero">
+      <div class="container">
+        <h1 class="reveal">Talk with Our Creator Advisors</h1>
+        <p style="max-width: 600px; margin: 1.5rem auto 0;" class="reveal">
+          Have scaling questions? Want customized migrations advice? Send us a ticket and we will respond within 4 hours.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INFO CARDS -->
+    <section class="section-spacing" style="padding-top: 0;">
+      <div class="container">
+        <div class="grid-3 card-equal-height-grid">
+          <!-- Card 1 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&w=600&q=80" alt="Support Email" loading="lazy">
+              </div>
+              <h3>Support Email</h3>
+              <p style="margin-top:0.5rem; font-weight:600; color:var(--color-primary);">support@inkflow.io</p>
+              <p style="margin-top:0.5rem; font-size:0.9rem;">Send technical bugs or billing concerns. 24/7 coverage.</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=600&q=80" alt="Call Support" loading="lazy">
+              </div>
+              <h3>Call Advisors</h3>
+              <p style="margin-top:0.5rem; font-weight:600; color:var(--color-primary);">+1 (800) 555-CRE8</p>
+              <p style="margin-top:0.5rem; font-size:0.9rem;">Available Mon-Fri, 9 AM to 6 PM EST for scaling calls.</p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="HQ Location" loading="lazy">
+              </div>
+              <h3>Corporate HQ</h3>
+              <p style="margin-top:0.5rem; font-weight:600; color:var(--color-primary);">San Francisco, CA</p>
+              <p style="margin-top:0.5rem; font-size:0.9rem;">100 Pine Street, Suite 1250, San Francisco, CA 94111.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CONTACT FORM & MAP -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container contact-grid">
+        <div class="form-wrapper reveal-left">
+          <h2>Send a Message</h2>
+          <form id="contactForm" style="margin-top:2rem;" novalidate>
+            <div class="form-group" id="nameGroup">
+              <label for="cName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="cName" placeholder="Enter your full name" required>
+              <div class="form-feedback">Name must be at least 2 characters.</div>
+            </div>
+
+            <div class="form-group" id="emailGroup">
+              <label for="cEmail" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="cEmail" placeholder="you@example.com" required>
+              <div class="form-feedback">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="cSubject" class="form-label">Subject</label>
+              <select class="form-control" id="cSubject">
+                <option value="sales">Sales & Upgrades Inquiry</option>
+                <option value="support">Technical Support Ticket</option>
+                <option value="migration">Audience Migration Advice</option>
+                <option value="partnership">Brand Sponsorship Partnership</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="msgGroup">
+              <label for="cMessage" class="form-label">Message Details</label>
+              <textarea class="form-control" id="cMessage" rows="5" placeholder="How can our team help you?" required></textarea>
+              <div class="form-feedback">Message details must exceed 10 characters.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit Ticket</button>
+          </form>
+        </div>
+
+        <!-- SECTION 4: OFFICE LOCATION MAP -->
+        <div class="reveal-right">
+          <h2>Our Locations</h2>
+          <p style="margin-block: 1rem 2rem;">Stop by our main operations node in San Francisco, or connect with our remote creators teams across London, Tokyo, and Sydney.</p>
+          
+          <svg viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: var(--radius-md); background-color: var(--color-bg); width: 100%;">
+            <rect width="450" height="300" rx="8" fill="var(--color-bg)" />
+            <path d="M0 50 H450 M0 100 H450 M0 150 H450 M0 200 H450 M0 250 H450 M50 0 V300 M100 0 V300 M150 0 V300 M200 0 V300 M250 0 V300 M300 0 V300 M350 0 V300 M400 0 V300" stroke="var(--color-border)" stroke-width="0.5" opacity="0.3" />
+            
+            <path d="M 50 80 Q 90 60 120 90 T 150 140 T 100 220 Z" fill="var(--color-muted)" opacity="0.15" />
+            <path d="M 220 120 Q 280 80 320 110 T 360 160 T 300 240 Z" fill="var(--color-muted)" opacity="0.15" />
+            
+            <g transform="translate(110, 100)">
+              <circle cx="0" cy="0" r="10" fill="var(--color-primary)" opacity="0.2" />
+              <circle cx="0" cy="0" r="5" fill="var(--color-primary)" />
+              <text x="10" y="4" font-family="system-ui" font-size="9" font-weight="700" fill="var(--color-text)">SF Office</text>
+            </g>
+            <g transform="translate(240, 90)">
+              <circle cx="0" cy="0" r="10" fill="var(--color-secondary)" opacity="0.2" />
+              <circle cx="0" cy="0" r="5" fill="var(--color-secondary)" />
+              <text x="10" y="4" font-family="system-ui" font-size="9" font-weight="700" fill="var(--color-text)">London Hub</text>
+            </g>
+            <g transform="translate(360, 120)">
+              <circle cx="0" cy="0" r="10" fill="var(--color-accent)" opacity="0.2" />
+              <circle cx="0" cy="0" r="5" fill="var(--color-accent)" />
+              <text x="10" y="4" font-family="system-ui" font-size="9" font-weight="700" fill="var(--color-text)">Tokyo Hub</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SUPPORT CHANNELS -->
+    <section class="section-spacing">
+      <div class="container text-center">
+        <h2 class="reveal">Alternate Support Channels</h2>
+        <p class="reveal" style="max-width: 600px; margin: 1rem auto 3rem;">Prefer different community touchpoints? Join our creator groups directly.</p>
+        
+        <div class="grid-3 card-equal-height-grid">
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80" alt="Discord" loading="lazy">
+              </div>
+              <h3>Creator Discord</h3>
+              <p style="margin-top:0.5rem;">Join 15,000+ publishers, writers, and designers. Exchange headlines, strategies, and growth systems.</p>
+            </div>
+            <a href="#" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Join Discord</a>
+          </div>
+
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80" alt="Knowledge Base" loading="lazy">
+              </div>
+              <h3>Knowledge Base</h3>
+              <p style="margin-top:0.5rem;">Browse 200+ quick step-by-step guides on configuring domains, Stripe APIs, SPF records, and CSV lists.</p>
+            </div>
+            <a href="#" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Search Database</a>
+          </div>
+
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="System Status" loading="lazy">
+              </div>
+              <h3>System Status</h3>
+              <p style="margin-top:0.5rem;">Check active delivery pipelines, SMTP server routes, dashboard databases, and APIs latency records.</p>
+            </div>
+            <a href="#" class="btn btn-secondary" style="margin-top:1.5rem; width:100%;">Check Status</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FAQ ACCORDION -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container" style="max-width: 800px;">
+        <h2 class="text-center reveal" style="margin-bottom: 3rem;">Quick Sales Questions</h2>
+        
+        <div class="accordion-container reveal">
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">How long do custom audience migrations take?</span>
+              <span class="accordion-icon">↓</span>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-content-inner">
+                <p>Standard migrations (under 10,000 subscribers) take less than 15 minutes. Our import scripts translate your unsubscribe tags, membership tiers, and email logs automatically.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">Do you offer custom enterprise pricing?</span>
+              <span class="accordion-icon">↓</span>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-content-inner">
+                <p>Yes. For publishers with over 100,000 active subscribers, we offer dedicated SMTP pipelines, custom service level agreements (SLAs), and volume discount options.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px;">
+              <rect width="32" height="32" rx="8" fill="url(#footerLogoGrad)" />
+              <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB" />
+                  <stop offset="1" stop-color="#7C3AED" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Inkflow</span>
+          </a>
+          <p style="font-size: 0.9rem;">Modern independent publishing software and community management engine.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-icon" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="features.html" class="footer-link">Features</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing</a></li>
+            <li><a href="home2.html" class="footer-link">Integrations</a></li>
+            <li><a href="#" class="footer-link">Changelog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="about.html" class="footer-link">Creators Guides</a></li>
+            <li><a href="#" class="footer-link">Status Page</a></li>
+            <li><a href="#" class="footer-link">API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Stay Connected</h4>
+          <p style="font-size: 0.875rem; margin-bottom: 1rem;">Receive creator tactics directly in your inbox.</p>
+          <div class="footer-newsletter">
+            <input type="email" class="form-control" placeholder="your@email.com" aria-label="Newsletter email">
+            <button class="btn btn-primary" type="button">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Inkflow, Inc. All rights reserved.</p>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Privacy Policy</a>
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    const form = document.getElementById('contactForm');
+    const nameInput = document.getElementById('cName');
+    const emailInput = document.getElementById('cEmail');
+    const msgInput = document.getElementById('cMessage');
+
+    const nameGroup = document.getElementById('nameGroup');
+    const emailGroup = document.getElementById('emailGroup');
+    const msgGroup = document.getElementById('msgGroup');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isValid = true;
+
+      if (nameInput.value.trim().length < 2) {
+        nameGroup.classList.add('error');
+        isValid = false;
+      } else {
+        nameGroup.classList.remove('error');
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value.trim())) {
+        emailGroup.classList.add('error');
+        isValid = false;
+      } else {
+        emailGroup.classList.remove('error');
+      }
+
+      if (msgInput.value.trim().length < 10) {
+        msgGroup.classList.add('error');
+        isValid = false;
+      } else {
+        msgGroup.classList.remove('error');
+      }
+
+      if (isValid) {
+        form.innerHTML = `
+          <div class="flex-center" style="flex-direction:column; min-height: 250px; text-align:center;">
+            <svg viewBox="0 0 48 48" fill="var(--color-success)" style="width:64px; height:64px; margin-bottom:1.5rem;">
+              <circle cx="24" cy="24" r="20" fill="var(--color-success)" opacity="0.1"/>
+              <path d="M14 24 L21 31 L34 16" fill="none" stroke="var(--color-success)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Ticket Submitted Successfully</h3>
+            <p style="margin-top:0.75rem; max-width:320px;">We've received your query and assigned advisor ticket ID: #528-910. Check your inbox for updates.</p>
+          </div>
+        `;
+      }
+    });
+
+    nameInput.addEventListener('blur', () => {
+      if (nameInput.value.trim().length >= 2) nameGroup.classList.remove('error');
+    });
+    emailInput.addEventListener('blur', () => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(emailInput.value.trim())) emailGroup.classList.remove('error');
+    });
+    msgInput.addEventListener('blur', () => {
+      if (msgInput.value.trim().length >= 10) msgGroup.classList.remove('error');
+    });
+  </script>
+</body>
+</html>

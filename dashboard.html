@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkflow — Creator Workspace Dashboard</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg">
+  <style>
+    /* Dashboard Specific Styles */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+    .db-sidebar {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-inline-end: 1px solid #1E293B;
+      z-index: 95;
+    }
+    @media (max-width: 992px) {
+      .dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+      .db-sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        bottom: 0;
+        width: 260px;
+        z-index: 150;
+        transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .db-sidebar.open {
+        left: 0;
+      }
+      html[dir="rtl"] .db-sidebar {
+        left: auto;
+        right: -260px;
+        transition: right 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      html[dir="rtl"] .db-sidebar.open {
+        left: auto;
+        right: 0;
+      }
+    }
+    #dbSidebarToggle {
+      display: none;
+    }
+    @media (max-width: 992px) {
+      #dbSidebarToggle {
+        display: flex;
+      }
+    }
+    .db-sidebar-toggles {
+      display: none !important;
+    }
+    .db-top-toggles {
+      display: flex !important;
+    }
+    @media (max-width: 992px) {
+      .db-sidebar-toggles {
+        display: flex !important;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-inline: 0.5rem;
+      }
+      .db-top-toggles {
+        display: none !important;
+      }
+    }
+    .db-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+    }
+    .db-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .db-menu-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      color: #94A3B8;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all var(--transition-fast);
+    }
+    .db-menu-link:hover, .db-menu-link.active {
+      color: #FFFFFF;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    .db-menu-link.active {
+      background-color: var(--color-primary);
+    }
+    .db-workspace {
+      background-color: var(--color-bg);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+    @media (max-width: 576px) {
+      .db-workspace {
+        padding: 1.5rem 1rem;
+      }
+    }
+
+    /* Top stats */
+    .db-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .db-stat-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .db-stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-block: 0.25rem;
+    }
+
+    /* Dashboard main grids */
+    .db-grid-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 1200px) {
+      .db-grid-main {
+        grid-template-columns: 1fr;
+      }
+    }
+    .db-panel {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    /* Subscribers Table */
+    .db-table-wrapper {
+      overflow-x: auto;
+      margin-top: 1.5rem;
+    }
+    .db-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: start;
+    }
+    .db-table th, .db-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.95rem;
+    }
+    .db-table th {
+      font-weight: 600;
+      color: var(--color-muted);
+      background-color: var(--color-bg);
+    }
+    .db-table tr:hover td {
+      background-color: rgba(37, 99, 235, 0.02);
+    }
+
+    /* Quick action buttons block */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Modal views styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      box-shadow: var(--shadow-premium);
+      width: 90%;
+      max-width: 500px;
+      transform: translateY(20px);
+      transition: transform var(--transition-normal);
+    }
+    .modal-overlay.open .modal-card {
+      transform: translateY(0);
+    }
+
+    /* Dashboard Header Navigation bar */
+    .db-nav-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Backdrop -->
+  <div class="backdrop"></div>
+
+  <!-- DASHBOARD OVERALL WRAPPER -->
+  <div class="dashboard-layout">
+
+    <!-- AREA 1: SIDEBAR NAVIGATION -->
+    <aside class="db-sidebar" id="dbSidebar">
+      <div>
+        <div class="db-brand">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px; height:28px;">
+            <rect width="32" height="32" rx="8" fill="url(#dbLogoGrad)" />
+            <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+            <defs>
+              <linearGradient id="dbLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563EB" />
+                <stop offset="1" stop-color="#7C3AED" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Inkflow Hub</span>
+        </div>
+        
+        <!-- Theme & RTL Toggles inside sidebar for mobile view -->
+        <div class="db-sidebar-toggles">
+          <button class="toggle-btn theme-toggle-btn" aria-label="Toggle Theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:20px; height:20px;">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px;">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button class="toggle-btn rtl-toggle-btn" aria-label="Switch to RTL">
+            <svg class="rtl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+              <path d="M4 9h16M16 5l4 4-4 4" />
+              <path d="M20 15H4M8 11l-4 4 4 4" />
+            </svg>
+            <span class="rtl-label sr-only">AR</span>
+          </button>
+        </div>
+        <ul class="db-menu">
+          <li><a href="#" class="db-menu-link active">Dashboard</a></li>
+          <li><a href="#" class="db-menu-link">Newsletters</a></li>
+          <li><a href="#" class="db-menu-link">Posts Feed</a></li>
+          <li><a href="#" class="db-menu-link">Subscribers</a></li>
+          <li><a href="#" class="db-menu-link">Analytics</a></li>
+          <li><a href="#" class="db-menu-link">Campaigns</a></li>
+          <li><a href="#" class="db-menu-link">Paid Members</a></li>
+          <li><a href="#" class="db-menu-link">Settings</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <a href="index.html" class="db-menu-link" style="margin-top:2rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD PANEL -->
+    <main class="db-workspace">
+
+      <!-- TOP DASHBOARD BAR -->
+      <div class="db-nav-top">
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <button class="toggle-btn" id="dbSidebarToggle" aria-label="Toggle Sidebar" style="display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <h2>Workspace Dashboard</h2>
+        </div>
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <!-- Toggles inside Dashboard workspace -->
+          <div class="db-top-toggles" style="display:flex; gap:1rem; align-items:center;">
+            <button class="toggle-btn theme-toggle-btn" aria-label="Toggle Theme">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:20px; height:20px;">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              </svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+            <button class="toggle-btn rtl-toggle-btn" aria-label="Switch to RTL">
+              <svg class="rtl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                <path d="M4 9h16M16 5l4 4-4 4" />
+                <path d="M20 15H4M8 11l-4 4 4 4" />
+              </svg>
+              <span class="rtl-label sr-only">AR</span>
+            </button>
+          </div>
+          <!-- Profile Badge -->
+          <img src="https://tse3.mm.bing.net/th/id/OIP.vWYRPS8TU9vOd3qNIeZL9wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Profile Avatar" style="width: 36px; height: 36px; border-radius: var(--radius-full); object-fit: cover; border: 1.5px solid var(--color-border); flex-shrink: 0;">
+        </div>
+      </div>
+
+      <!-- AREA 2: TOP STATS CARDS -->
+      <div class="db-stats-grid">
+        <div class="db-stat-card">
+          <div>
+            <p style="font-size:0.85rem; color:var(--color-muted);">Total Subscribers</p>
+            <div class="db-stat-num counter-val" data-target="24830">0</div>
+            <span style="font-size:0.8rem; color:var(--color-success); font-weight:600;">+12% this month</span>
+          </div>
+          <!-- Sparkline representation -->
+          <svg viewBox="0 0 60 30" width="60" height="30" stroke="var(--color-primary)" stroke-width="2" fill="none"><path d="M0 25 L10 20 L20 22 L30 15 L40 18 L50 8 L60 5" stroke-linecap="round"/></svg>
+        </div>
+
+        <div class="db-stat-card">
+          <div>
+            <p style="font-size:0.85rem; color:var(--color-muted);">Avg Open Rate</p>
+            <div class="db-stat-num">54.8%</div>
+            <span style="font-size:0.8rem; color:var(--color-success); font-weight:600;">+4.2% this month</span>
+          </div>
+          <svg viewBox="0 0 60 30" width="60" height="30" stroke="var(--color-secondary)" stroke-width="2" fill="none"><path d="M0 20 L10 18 L20 15 L30 16 L40 10 L50 8 L60 4" stroke-linecap="round"/></svg>
+        </div>
+
+        <div class="db-stat-card">
+          <div>
+            <p style="font-size:0.85rem; color:var(--color-muted);">Monthly Revenues</p>
+            <div class="db-stat-num">$12,480</div>
+            <span style="font-size:0.8rem; color:var(--color-success); font-weight:600;">+18% this month</span>
+          </div>
+          <svg viewBox="0 0 60 30" width="60" height="30" stroke="var(--color-success)" stroke-width="2" fill="none"><path d="M0 25 L10 24 L20 18 L30 20 L40 14 L50 10 L60 2" stroke-linecap="round"/></svg>
+        </div>
+
+        <div class="db-stat-card">
+          <div>
+            <p style="font-size:0.85rem; color:var(--color-muted);">Published Issues</p>
+            <div class="db-stat-num">48</div>
+            <span style="font-size:0.8rem; color:var(--color-muted);">8 scheduled drafts</span>
+          </div>
+          <svg viewBox="0 0 60 30" width="60" height="30" stroke="var(--color-accent)" stroke-width="2" fill="none"><path d="M0 20 H10 V15 H20 V25 H30 V10 H40 V15 H50 V5 H60" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- AREA 3 & 4: CHARTS PANEL & ACTIVITY -->
+      <div class="db-grid-main">
+        <!-- Dashboard Charts Panel -->
+        <div class="db-panel">
+          <h3>Subscribers Engagement Chart</h3>
+          <p style="font-size:0.875rem; color:var(--color-muted); margin-bottom:1.5rem;">Visual weekly active reading engagement stats.</p>
+          <div style="background-color: var(--color-bg); border-radius: var(--radius-md); padding: 1.5rem;">
+            <!-- Main SVG Chart (area mode) -->
+            <svg viewBox="0 0 600 220" class="svg-chart" data-type="area" data-points="1400,2800,3400,5600,8900,12480" style="height:220px; width:100%;"></svg>
+          </div>
+        </div>
+
+        <!-- AREA 5: QUICK ACTIONS PANEL -->
+        <div class="db-panel" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <h3>Quick Workspace Actions</h3>
+            <p style="font-size:0.875rem; color:var(--color-muted); margin-bottom:1.5rem;">Select tools to configure publications.</p>
+            <div class="quick-actions-grid">
+              <button class="btn btn-primary" id="btnDraft" style="font-size:0.85rem; padding:0.6rem;">Write Draft</button>
+              <button class="btn btn-secondary" id="btnImport" style="font-size:0.85rem; padding:0.6rem;">Import CSV</button>
+              <button class="btn btn-secondary" id="btnExport" style="font-size:0.85rem; padding:0.6rem; grid-column:span 2;">Export Reports</button>
+            </div>
+          </div>
+          
+          <!-- Recent activity feed -->
+          <div style="margin-top:2rem;">
+            <h3>Recent Log events</h3>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem; font-size:0.875rem;">
+              <li style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:0.5rem;">
+                <span>user12@domain.com registered</span>
+                <span style="color:var(--color-muted);">2m ago</span>
+              </li>
+              <li style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:0.5rem;">
+                <span>Sponsorship invoice $850 paid</span>
+                <span style="color:var(--color-muted);">1h ago</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- AREA 6: SUBSCRIBERS TABLE -->
+      <div class="db-panel">
+        <div class="flex-between">
+          <h3>Subscribers list balance</h3>
+          <input type="text" class="form-control" id="tableSearch" placeholder="Search emails..." style="max-width:240px; padding:0.5rem 1rem; font-size:0.85rem;">
+        </div>
+        
+        <div class="db-table-wrapper">
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th>Email Address</th>
+                <th>Source tag</th>
+                <th>Engagement status</th>
+                <th>Payout value</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr class="table-row-item">
+                <td>alex.rivera@techpulse.io</td>
+                <td style="font-weight:600;">google-search</td>
+                <td><span style="color:var(--color-success); font-weight:600;">Active</span></td>
+                <td>$5.00/mo</td>
+              </tr>
+              <tr class="table-row-item">
+                <td>jenkins.s@capitalist.com</td>
+                <td style="font-weight:600;">twitter-prom</td>
+                <td><span style="color:var(--color-success); font-weight:600;">Active</span></td>
+                <td>$0.00/mo</td>
+              </tr>
+              <tr class="table-row-item">
+                <td>tanaka.k@zenlife.jp</td>
+                <td style="font-weight:600;">direct-ref</td>
+                <td><span style="color:var(--color-success); font-weight:600;">Active</span></td>
+                <td>$10.00/mo</td>
+              </tr>
+              <tr class="table-row-item">
+                <td>bounced.user@domain.com</td>
+                <td style="font-weight:600;">banned-seg</td>
+                <td><span style="color:var(--color-warning); font-weight:600;">Unsubscribed</span></td>
+                <td>$0.00/mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- INTERACTIVE MODAL 1: WRITE DRAFT -->
+  <div class="modal-overlay" id="modalDraftOverlay">
+    <div class="modal-card">
+      <h3>Create New Newsletter Draft</h3>
+      <form id="draftForm" style="margin-top:1.5rem;">
+        <div class="form-group">
+          <label for="dTitle" class="form-label">Issue Subject Header</label>
+          <input type="text" class="form-control" id="dTitle" placeholder="Why AI scaling models are plateauing" required>
+        </div>
+        <div class="form-group">
+          <label for="dBody" class="form-label">Issue Body Details</label>
+          <textarea class="form-control" id="dBody" rows="4" placeholder="Compose draft layout in markdown..." required></textarea>
+        </div>
+        <div style="display:flex; gap:1rem; justify-content:flex-end;">
+          <button class="btn btn-secondary" type="button" id="btnDraftCancel">Cancel</button>
+          <button class="btn btn-primary" type="submit">Save Draft</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MODAL 2: IMPORT CSV -->
+  <div class="modal-overlay" id="modalImportOverlay">
+    <div class="modal-card">
+      <h3>Import Subscribers from CSV</h3>
+      <form id="importForm" style="margin-top:1.5rem;">
+        <div class="form-group">
+          <label for="iFile" class="form-label">Select CSV Database File</label>
+          <input type="file" class="form-control" id="iFile" accept=".csv" required style="padding:0.5rem;">
+        </div>
+        <div class="form-group">
+          <label for="iTag" class="form-label">Apply Segments Tag</label>
+          <input type="text" class="form-control" id="iTag" placeholder="substack-migration-2026">
+        </div>
+        <div style="display:flex; gap:1rem; justify-content:flex-end;">
+          <button class="btn btn-secondary" type="button" id="btnImportCancel">Cancel</button>
+          <button class="btn btn-primary" type="submit">Import List</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MODAL 3: EXPORT REPORTS -->
+  <div class="modal-overlay" id="modalExportOverlay">
+    <div class="modal-card">
+      <h3>Export System Reports</h3>
+      <p style="margin-top:1rem; font-size:0.95rem;">Select dataset formats to securely download archives.</p>
+      <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1.5rem;">
+        <button class="btn btn-secondary" style="justify-content:flex-start;" id="btnDownloadCSV">Download Subscribers CSV list</button>
+        <button class="btn btn-secondary" style="justify-content:flex-start;" id="btnDownloadPDF">Download Analytics PDF dashboard</button>
+        <button class="btn btn-primary" id="btnExportCancel" style="justify-content:center; margin-top:1rem;">Close Panel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Toggle Mobile sidebar drawer if toggles are visible
+    const sidebarToggle = document.getElementById('dbSidebarToggle');
+    const sidebar = document.getElementById('dbSidebar');
+    
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        document.querySelector('.backdrop').classList.toggle('open');
+      });
+      
+      document.querySelector('.backdrop').addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        document.querySelector('.backdrop').classList.remove('open');
+      });
+    }
+
+    // Modal triggers script
+    const btnDraft = document.getElementById('btnDraft');
+    const btnImport = document.getElementById('btnImport');
+    const btnExport = document.getElementById('btnExport');
+
+    const draftOverlay = document.getElementById('modalDraftOverlay');
+    const importOverlay = document.getElementById('modalImportOverlay');
+    const exportOverlay = document.getElementById('modalExportOverlay');
+
+    const btnDraftCancel = document.getElementById('btnDraftCancel');
+    const btnImportCancel = document.getElementById('btnImportCancel');
+    const btnExportCancel = document.getElementById('btnExportCancel');
+
+    const openModal = (modal) => {
+      modal.classList.add('open');
+    };
+    const closeModal = (modal) => {
+      modal.classList.remove('open');
+    };
+
+    btnDraft.addEventListener('click', () => openModal(draftOverlay));
+    btnImport.addEventListener('click', () => openModal(importOverlay));
+    btnExport.addEventListener('click', () => openModal(exportOverlay));
+
+    btnDraftCancel.addEventListener('click', () => closeModal(draftOverlay));
+    btnImportCancel.addEventListener('click', () => closeModal(importOverlay));
+    btnExportCancel.addEventListener('click', () => closeModal(exportOverlay));
+
+    // Handle Forms Mock Submits
+    document.getElementById('draftForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal(draftOverlay);
+      alert('Draft saved successfully to workspace!');
+    });
+    document.getElementById('importForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal(importOverlay);
+      alert('CSV file queued for database imports!');
+    });
+
+    // Subscriber Table search filter
+    const searchInput = document.getElementById('tableSearch');
+    const tableRows = document.querySelectorAll('.table-row-item');
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      tableRows.forEach(row => {
+        const email = row.querySelector('td:first-child').textContent.toLowerCase();
+        if (email.includes(query)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

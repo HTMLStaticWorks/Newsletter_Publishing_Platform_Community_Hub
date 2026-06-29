@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkflow — Sign Up for Creator Account</title>
+  <meta name="description" content="Create your free Inkflow account today. Own your content, customize templates, and build relationships directly.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg">
+  <style>
+    /* Auth Split View Styles */
+    .auth-split-layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+    }
+    @media (max-width: 992px) {
+      .auth-split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .auth-info-side {
+      background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(124,58,237,0.06));
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-inline-end: 1px solid var(--color-border);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 992px) {
+      .auth-info-side {
+        display: none;
+      }
+    }
+    .auth-form-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      background-color: var(--color-bg);
+    }
+    .auth-glass-card {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Password strength indicator layout */
+    .strength-meter-container {
+      margin-top: 0.5rem;
+    }
+    .strength-bars-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+    .strength-bar {
+      height: 4px;
+      background-color: var(--color-border);
+      border-radius: var(--radius-full);
+      transition: background-color var(--transition-fast);
+    }
+    .strength-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-split-layout">
+    
+    <!-- LEFT INFO SIDE -->
+    <div class="auth-info-side">
+      <a href="index.html" class="nav-logo" style="margin-bottom:4rem;">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px;">
+          <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+          <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563EB" />
+              <stop offset="1" stop-color="#7C3AED" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Inkflow</span>
+      </a>
+
+      <div style="max-width: 500px; margin-bottom:3rem;">
+        <h2>Join 50,000+ Independent Writers</h2>
+        <p style="margin-top:1rem;">Build custom websites, setup automations, run sponsorship drives, and capture subscriber databases cleanly.</p>
+      </div>
+
+      <div class="grid-3 card-equal-height-grid" style="gap:1.5rem;">
+        <div class="premium-card">
+          <div>
+            <div class="card-illustration">
+              <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=300&q=80" alt="Secure SMTP" loading="lazy">
+            </div>
+            <h4>Secure SMTP</h4>
+          </div>
+        </div>
+        <div class="premium-card">
+          <div>
+            <div class="card-illustration">
+              <img src="https://images.unsplash.com/photo-1526253038957-bce54e05968e?auto=format&fit=crop&w=300&q=80" alt="No lock-in" loading="lazy">
+            </div>
+            <h4>No Lock-in</h4>
+          </div>
+        </div>
+        <div class="premium-card">
+          <div>
+            <div class="card-illustration">
+              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300&q=80" alt="Global Growth" loading="lazy">
+            </div>
+            <h4>Global Growth</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM SIDE -->
+    <div class="auth-form-side">
+      <div class="auth-glass-card">
+        <h3>Create Your Account</h3>
+        <p style="margin-block: 0.5rem 2rem; font-size:0.95rem; color:var(--color-muted);">No credit card required. Cancel anytime.</p>
+        
+        <form action="dashboard.html" method="GET">
+          <div class="form-group">
+            <label for="sName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="sName" placeholder="Alex Rivera" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="sEmail" placeholder="alex@domain.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sPass" class="form-label">Choose Password</label>
+            <input type="password" class="form-control password-strength-input" id="sPass" placeholder="At least 6 characters" required>
+            
+            <!-- Real-time Password Strength Meter -->
+            <div class="strength-meter-container">
+              <div class="strength-bars-row">
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+                <div class="strength-bar"></div>
+              </div>
+              <div class="strength-text"></div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:0.5rem; margin-bottom:2rem;">
+            <input type="checkbox" id="sTerms" required style="margin-top: 0.25rem;">
+            <label for="sTerms" style="font-size:0.85rem; user-select:none; cursor:pointer;">I accept Inkflow's <a href="#" style="color:var(--color-primary); font-weight:600;">Terms of Service</a> and acknowledge the <a href="#" style="color:var(--color-primary); font-weight:600;">Privacy Policy</a>.</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding-block:0.8rem;">Register Creator Account</button>
+        </form>
+
+        <div style="position:relative; text-align:center; margin-block:2rem; border-bottom: 1px solid var(--color-border);">
+          <span style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background-color:var(--color-card); padding-inline:1rem; font-size:0.8rem; color:var(--color-muted);">OR SIGN UP WITH</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:1rem;">
+          <a href="dashboard.html" class="btn btn-secondary" style="justify-content:center; gap:0.5rem; font-size:0.9rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            GitHub
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary" style="justify-content:center; gap:0.5rem; font-size:0.9rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+            LinkedIn
+          </a>
+        </div>
+
+        <p style="margin-top:2rem; text-align:center; font-size:0.9rem; color:var(--color-muted);">
+          Already have an account? <a href="login.html" style="color:var(--color-primary); font-weight:600;">Sign in here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

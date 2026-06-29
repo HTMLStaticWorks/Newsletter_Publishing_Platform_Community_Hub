@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkflow — Powerful Features for Modern Newsletter Publishers</title>
+  <meta name="description" content="Explore Inkflow's premium editor, deep subscriber segmentation, visual automation pipelines, and direct Stripe monetization widgets.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg">
+  <style>
+    /* Features Unique Styles */
+    .feature-hero {
+      padding-top: clamp(6rem, 10vw, 9rem);
+      padding-bottom: clamp(3rem, 6vw, 4rem);
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(6, 182, 212, 0.05) 0%, rgba(248, 250, 252, 0) 75%);
+    }
+    [data-theme="dark"] .feature-hero {
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.1) 0%, rgba(15, 23, 42, 0) 75%);
+    }
+
+    /* Mock Editor Styles */
+    .editor-mockup {
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      max-width: 800px;
+      margin: 3rem auto 0;
+      overflow: hidden;
+      text-align: start;
+    }
+    .editor-toolbar {
+      background-color: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .editor-tool-btn {
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      background-color: var(--color-card);
+      transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .editor-tool-btn:hover, .editor-tool-btn.active {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #FFFFFF;
+    }
+    .editor-canvas {
+      padding: 2rem;
+      min-height: 250px;
+    }
+    .editor-content-node {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .editor-content-node.bold {
+      font-weight: 700;
+    }
+    .editor-content-node.italic {
+      font-style: italic;
+    }
+    .editor-content-node.code {
+      font-family: monospace;
+      background-color: var(--color-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border-inline-start: 4px solid var(--color-primary);
+    }
+
+    /* Dynamic Analytics Tabs */
+    .analytics-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .analytics-tab {
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      background-color: var(--color-card);
+      transition: all var(--transition-fast);
+    }
+    .analytics-tab.active {
+      background-color: var(--color-primary);
+      color: #FFFFFF;
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+    .chart-panel {
+      display: none;
+    }
+    .chart-panel.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Backdrop -->
+  <div class="backdrop"></div>
+
+  <!-- HEADER -->
+  <header class="sticky-header">
+    <div class="container flex-between">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+          <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2563EB" />
+              <stop offset="1" stop-color="#7C3AED" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Inkflow</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="home2.html" class="nav-link">Home 2</a></li>
+          <li><a href="features.html" class="nav-link active">Features</a></li>
+          <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="toggle-btn theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none; width:20px; height:20px;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="toggle-btn rtl-toggle-btn" aria-label="Switch to RTL">
+          <svg class="rtl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+            <path d="M4 9h16M16 5l4 4-4 4" />
+            <path d="M20 15H4M8 11l-4 4 4 4" />
+          </svg>
+          <span class="rtl-label sr-only">AR</span>
+        </button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+
+        <!-- Hamburger Icon for Mobile -->
+        <div class="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer">
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+      <li><a href="home2.html" class="mobile-drawer-link">Home 2</a></li>
+      <li><a href="features.html" class="mobile-drawer-link active">Features</a></li>
+      <li><a href="pricing.html" class="mobile-drawer-link">Pricing</a></li>
+      <li><a href="about.html" class="mobile-drawer-link">About</a></li>
+      <li><a href="faq.html" class="mobile-drawer-link">FAQ</a></li>
+      <li><a href="contact.html" class="mobile-drawer-link">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-actions">
+      <a href="dashboard.html" class="btn btn-secondary" style="width: 100%;">Dashboard</a>
+      <a href="signup.html" class="btn btn-primary" style="width: 100%;">Sign Up</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- SECTION 1: FEATURE HERO -->
+    <section class="feature-hero">
+      <div class="container">
+        <h1 class="reveal">Tools Engineered for Professional Writers</h1>
+        <p style="max-width: 600px; margin: 1.5rem auto 0;" class="reveal">
+          Everything you need to design templates, target specific subscriber segments, visual-schedule posts, and charge memberships globally.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE POWERFUL EDITOR -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="grid-2" style="align-items: center;">
+          <div class="reveal-left">
+            <h2>The Distraction-Free Editor</h2>
+            <p style="margin-top:1.5rem;">
+              Craft your narrative using modern styling controls. Support for markdown syntaxes, inline quotes, and widgets lets you design letters that look visually stunning.
+            </p>
+            <p style="margin-top:1rem; font-size: 0.95rem; color: var(--color-muted);">
+              Try selecting the mock tools on the editor layout card to preview the visual rendering engine.
+            </p>
+          </div>
+          <div class="reveal-right">
+            <div class="editor-mockup">
+              <div class="editor-toolbar">
+                <button class="editor-tool-btn active" data-style="normal">Normal Text</button>
+                <button class="editor-tool-btn" data-style="bold">Bold Title</button>
+                <button class="editor-tool-btn" data-style="italic">Italic Text</button>
+                <button class="editor-tool-btn" data-style="code">Code Block</button>
+              </div>
+              <div class="editor-canvas">
+                <div class="editor-content-node" id="editorContent">
+                  Create a newsletter issue today. Type something meaningful to tell your readers about the latest tech updates. We handle the responsive distribution across mobile clients and modern web browsers.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SUBSCRIBER MANAGEMENT -->
+    <section class="section-spacing">
+      <div class="container grid-2" style="align-items: center;">
+        <div class="reveal-left">
+          <!-- SVG Audience tagging graphic -->
+          <svg viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: var(--radius-md); background-color: var(--color-card); border:1px solid var(--color-border); box-shadow: var(--shadow-md); width:100%;">
+            <rect width="450" height="40" fill="var(--color-bg)" />
+            <text x="20" y="24" font-family="system-ui" font-size="12" font-weight="600" fill="var(--color-text)">Tag-Based Segmentation</text>
+            
+            <!-- Filters list -->
+            <g transform="translate(20, 60)">
+              <rect x="0" y="0" width="100" height="24" rx="12" fill="var(--color-primary)" opacity="0.1" />
+              <text x="12" y="16" font-family="system-ui" font-size="10" font-weight="600" fill="var(--color-primary)">status: active</text>
+
+              <rect x="110" y="0" width="115" height="24" rx="12" fill="var(--color-secondary)" opacity="0.1" />
+              <text x="122" y="16" font-family="system-ui" font-size="10" font-weight="600" fill="var(--color-secondary)">source: referral</text>
+
+              <rect x="235" y="0" width="130" height="24" rx="12" fill="var(--color-accent)" opacity="0.1" />
+              <text x="247" y="16" font-family="system-ui" font-size="10" font-weight="600" fill="var(--color-accent)">tier: pro-members</text>
+            </g>
+
+            <!-- Table visual mock -->
+            <g transform="translate(20, 110)">
+              <rect x="0" y="0" width="410" height="35" rx="4" fill="var(--color-bg)" />
+              <text x="15" y="22" font-family="system-ui" font-size="11" fill="var(--color-text)">user1@domain.com</text>
+              <rect x="300" y="8" width="80" height="18" rx="4" fill="var(--color-success)" opacity="0.1" />
+              <text x="340" y="20" font-family="system-ui" font-size="9" fill="var(--color-success)" text-anchor="middle">Subscribed</text>
+
+              <rect x="0" y="45" width="410" height="35" rx="4" fill="var(--color-bg)" />
+              <text x="15" y="67" font-family="system-ui" font-size="11" fill="var(--color-text)">user2@domain.com</text>
+              <rect x="300" y="53" width="80" height="18" rx="4" fill="var(--color-success)" opacity="0.1" />
+              <text x="340" y="65" font-family="system-ui" font-size="9" fill="var(--color-success)" text-anchor="middle">Subscribed</text>
+
+              <rect x="0" y="90" width="410" height="35" rx="4" fill="var(--color-bg)" />
+              <text x="15" y="112" font-family="system-ui" font-size="11" fill="var(--color-text)">user3@domain.com</text>
+              <rect x="300" y="98" width="80" height="18" rx="4" fill="var(--color-warning)" opacity="0.1" />
+              <text x="340" y="110" font-family="system-ui" font-size="9" fill="var(--color-warning)" text-anchor="middle">Bounced</text>
+            </g>
+          </svg>
+        </div>
+        <div class="reveal-right">
+          <h2>Organize Your Audience Intuitively</h2>
+          <p style="margin-top:1.5rem;">
+            Never let bad database systems hold you back. Import subscribers instantly using CSV or direct API hooks. Apply tagging rules dynamically, segment users by source link, and build targeted email broadcasts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ANALYTICS & REPORTING -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container text-center">
+        <h2 class="reveal">Deep Real-Time Engagement Analytics</h2>
+        <p class="reveal" style="max-width: 600px; margin: 1rem auto 3rem;">Toggle the graphs below to review reporting dashboard metrics.</p>
+        
+        <div class="analytics-tabs reveal">
+          <button class="analytics-tab active" data-target="growthPanel">List Growth</button>
+          <button class="analytics-tab" data-target="openPanel">Open Rate Trend</button>
+          <button class="analytics-tab" data-target="revPanel">Revenue Breakdown</button>
+        </div>
+
+        <div style="max-width:800px; margin:0 auto; background-color:var(--color-bg); border-radius:var(--radius-xl); padding:2rem;" class="reveal">
+          <div class="chart-panel active" id="growthPanel">
+            <svg viewBox="0 0 600 250" class="svg-chart" data-type="area" data-points="1200,2400,3200,5400,8600,12800" style="height:250px; width:100%;"></svg>
+            <p style="margin-top:1rem; font-size:0.9rem;">Subscribers count showing steady 4x growth after referral systems setup.</p>
+          </div>
+
+          <div class="chart-panel" id="openPanel">
+            <svg viewBox="0 0 600 250" class="svg-chart" data-type="line" data-points="32,45,42,54,52,58" style="height:250px; width:100%;"></svg>
+            <p style="margin-top:1rem; font-size:0.9rem;">Open rates increasing following automated subject line A/B testing.</p>
+          </div>
+
+          <div class="chart-panel" id="revPanel">
+            <svg viewBox="0 0 600 250" class="svg-chart" data-type="bar" data-points="450,1200,1800,3400,5600,8900" style="height:250px; width:100%;"></svg>
+            <p style="margin-top:1rem; font-size:0.9rem;">Monthly Recurring Revenue (MRR) following premium paid tier introduction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: AUTOMATION & SCHEDULING -->
+    <section class="section-spacing">
+      <div class="container grid-2" style="align-items: center;">
+        <div class="reveal-left">
+          <h2>Visual Email Automation Pipelines</h2>
+          <p style="margin-block: 1.5rem 2.5rem;">
+            Design dynamic email sequences with a visual workflow builder. Build onboarding sequences for new free subscribers, upsell campaigns for warm readers, and reminder emails for expiring premium trial tiers.
+          </p>
+          <a href="signup.html" class="btn btn-primary">Start Automating</a>
+        </div>
+        <div class="reveal-right">
+          <!-- Visual representation of workflow builder -->
+          <svg viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius: var(--radius-md); background-color: var(--color-bg); width: 100%;">
+            <!-- Trigger Card -->
+            <rect x="150" y="20" width="150" height="50" rx="8" fill="var(--color-card)" stroke="var(--color-primary)" stroke-width="2" />
+            <text x="225" y="42" font-family="system-ui" font-size="11" font-weight="700" fill="var(--color-text)" text-anchor="middle">Trigger: New Signup</text>
+            <text x="225" y="58" font-family="system-ui" font-size="9" fill="var(--color-muted)" text-anchor="middle">Target list: main-audience</text>
+
+            <line x1="225" y1="70" x2="225" y2="100" stroke="var(--color-border)" stroke-width="2" />
+
+            <!-- Delay Card -->
+            <rect x="150" y="100" width="150" height="40" rx="6" fill="var(--color-card)" stroke="var(--color-border)" stroke-width="1.5" />
+            <text x="225" y="125" font-family="system-ui" font-size="11" fill="var(--color-text)" text-anchor="middle">Delay: 1 Day</text>
+
+            <line x1="225" y1="140" x2="225" y2="170" stroke="var(--color-border)" stroke-width="2" />
+
+            <!-- Action Card -->
+            <rect x="150" y="170" width="150" height="50" rx="8" fill="var(--color-card)" stroke="var(--color-secondary)" stroke-width="2" />
+            <text x="225" y="192" font-family="system-ui" font-size="11" font-weight="700" fill="var(--color-text)" text-anchor="middle">Action: Send Email</text>
+            <text x="225" y="208" font-family="system-ui" font-size="9" fill="var(--color-primary)" text-anchor="middle">Template: welcome-issue</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: INTEGRATIONS & SECURITY -->
+    <section class="section-spacing" style="background-color: var(--color-card); border-block: 1px solid var(--color-border);">
+      <div class="container text-center">
+        <h2 class="reveal">Integrate with Your Tech Stack</h2>
+        <p class="reveal" style="max-width: 600px; margin: 1rem auto 4rem;">Connect Inkflow directly with Stripe, Slack, Discord, Zapier, and custom API keys to build bespoke workflows.</p>
+        
+        <div class="grid-3 card-equal-height-grid">
+          <!-- Card 1 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="assets/image/Secure Stripe Billing.png" alt="Stripe Billing" loading="lazy">
+              </div>
+              <h3>Secure Stripe Billing</h3>
+              <p style="margin-top:0.75rem;">Charge readers in 135+ currencies. We utilize Stripe Customer Portals natively to allow readers to modify subscriptions and payment methods easily.</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Slack Integrations" loading="lazy">
+              </div>
+              <h3>Community Webhooks</h3>
+              <p style="margin-top:0.75rem;">Ping Slack and Discord when new members register, or auto-assign subscriber roles inside Discord servers via custom OAuth2 rules.</p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="premium-card reveal">
+            <div>
+              <div class="card-illustration">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Security Guard" loading="lazy">
+              </div>
+              <h3>Enterprise Security</h3>
+              <p style="margin-top:0.75rem;">Keep credentials safe. Inkflow includes DKIM settings, custom SPF records, SSL encryption, and custom team permission levels.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px;">
+              <rect width="32" height="32" rx="8" fill="url(#footerLogoGrad)" />
+              <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB" />
+                  <stop offset="1" stop-color="#7C3AED" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Inkflow</span>
+          </a>
+          <p style="font-size: 0.9rem;">Modern independent publishing software and community management engine.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-icon" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px; height:18px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="features.html" class="footer-link">Features</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing</a></li>
+            <li><a href="home2.html" class="footer-link">Integrations</a></li>
+            <li><a href="#" class="footer-link">Changelog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="about.html" class="footer-link">Creators Guides</a></li>
+            <li><a href="#" class="footer-link">Status Page</a></li>
+            <li><a href="#" class="footer-link">API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="#" class="footer-link">Careers</a></li>
+            <li><a href="#" class="footer-link">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Stay Connected</h4>
+          <p style="font-size: 0.875rem; margin-bottom: 1rem;">Receive creator tactics directly in your inbox.</p>
+          <div class="footer-newsletter">
+            <input type="email" class="form-control" placeholder="your@email.com" aria-label="Newsletter email">
+            <button class="btn btn-primary" type="button">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Inkflow, Inc. All rights reserved.</p>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Privacy Policy</a>
+          <a href="#" class="footer-link" style="font-size:0.875rem;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    const toolBtns = document.querySelectorAll('.editor-tool-btn');
+    const contentNode = document.getElementById('editorContent');
+
+    toolBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        toolBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const style = btn.getAttribute('data-style');
+        contentNode.className = 'editor-content-node'; 
+
+        if (style === 'bold') {
+          contentNode.classList.add('bold');
+          contentNode.textContent = "How to Design Premium Newsletters Natively";
+        } else if (style === 'italic') {
+          contentNode.classList.add('italic');
+          contentNode.textContent = "Writing is the process of putting down thoughts. Inkflow keeps the dashboard out of the way so you write content that transforms minds.";
+        } else if (style === 'code') {
+          contentNode.classList.add('code');
+          contentNode.textContent = "const publishIssue = async (id) => {\n  const res = await api.post(`/issues/${id}/distribute`);\n  return res.data;\n};";
+        } else {
+          contentNode.textContent = "Create a newsletter issue today. Type something meaningful to tell your readers about the latest tech updates. We handle the responsive distribution across mobile clients and modern web browsers.";
+        }
+      });
+    });
+
+    const tabBtns = document.querySelectorAll('.analytics-tab');
+    const panels = document.querySelectorAll('.chart-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const target = btn.getAttribute('data-target');
+        panels.forEach(p => {
+          if (p.id === target) {
+            p.classList.add('active');
+            const chart = p.querySelector('.svg-chart');
+            if (chart && typeof initCharts === 'function') {
+              const strokePath = chart.querySelector('path[stroke]');
+              if (strokePath) {
+                strokePath.style.strokeDashoffset = '0';
+              }
+            }
+          } else {
+            p.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
