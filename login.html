@@ -38,7 +38,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 3rem;
+      padding: 6.5rem 3rem 3rem;
       background-color: var(--color-bg);
     }
     .auth-glass-card {
@@ -86,7 +86,7 @@
     
     <!-- LEFT INFO SIDE -->
     <div class="auth-info-side">
-      <a href="index.html" class="nav-logo" style="margin-bottom:4rem;">
+      <a href="index.html" class="nav-logo" style="margin-bottom:4rem; align-self: center; justify-content: center;">
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px;">
           <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
           <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
@@ -100,7 +100,7 @@
         <span>Inkflow</span>
       </a>
 
-      <div style="max-width: 500px; margin-bottom:3rem;">
+      <div style="max-width: 500px; margin-bottom:3rem; text-align: center; margin-inline: auto;">
         <h2>The Infrastructure Behind Independent Media</h2>
         <p style="margin-top:1rem;">Access your dashboard to compose new drafts, review list metrics, target paid members, and manage your billing integrations.</p>
       </div>
@@ -120,6 +120,21 @@
     <!-- RIGHT FORM SIDE -->
     <div class="auth-form-side">
       <div class="auth-glass-card">
+        <!-- Logo inside card (Visible only on mobile/tablet) -->
+        <a href="index.html" class="nav-logo mobile-logo">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px;">
+            <rect width="32" height="32" rx="8" fill="url(#cardLogoGrad2)" />
+            <path d="M10 22V10H14C16.5 10 18.5 11 18.5 13.5C18.5 15.5 17 16.5 15.5 16.8L19.5 22H16L12.5 17.5H12V22H10ZM12 15H14C15.2 15 16 14.5 16 13.5C16 12.5 15.2 12 14 12H12V15Z" fill="#FFFFFF" />
+            <defs>
+              <linearGradient id="cardLogoGrad2" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563EB" />
+                <stop offset="1" stop-color="#7C3AED" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Inkflow</span>
+        </a>
+
         <h3>Welcome Back</h3>
         <p style="margin-block: 0.5rem 2rem; font-size:0.95rem; color:var(--color-muted);">Enter your credentials to enter dashboard.</p>
         

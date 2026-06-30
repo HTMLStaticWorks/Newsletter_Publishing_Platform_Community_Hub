@@ -420,9 +420,13 @@ p {
 .nav-link {
   font-weight: var(--fw-nav);
   font-size: 0.95rem;
-  color: var(--color-muted);
+  color: #334155;
   position: relative;
   padding-block: 0.25rem;
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--color-muted);
 }
 
 .nav-link:hover, .nav-link.active {
@@ -1315,8 +1319,8 @@ html[dir="rtl"] .footer-grid > div:last-child {
 /* Floating Auth Toggles */
 .auth-floating-actions {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 2rem;
+  right: 2rem;
   display: flex;
   gap: 1rem;
   z-index: 100;
@@ -1324,7 +1328,7 @@ html[dir="rtl"] .footer-grid > div:last-child {
 
 html[dir="rtl"] .auth-floating-actions {
   right: auto;
-  left: 1.5rem;
+  left: 2rem;
 }
 
 /* Hover style for Auth switch links */
@@ -1360,3 +1364,134 @@ html[dir="rtl"] .auth-floating-actions {
 .hero-section-home2 p {
   color: rgba(255, 255, 255, 0.85) !important;
 }
+
+/* ==========================================================================
+   14. CUSTOM RESPONSIVE ALIGNMENTS AND OVERRIDES
+   ========================================================================== */
+
+/* 2) Header padding and hero spacing on mobile/tablet */
+@media (max-width: 1024px) {
+  .sticky-header {
+    padding-block: 0.85rem;
+  }
+  .hero-section,
+  .hero-section-home2,
+  .hero-split {
+    padding-top: 9.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section,
+  .hero-section-home2,
+  .hero-split {
+    padding-top: 8.5rem !important;
+  }
+}
+
+/* 4) Hover state for secondary buttons in dark hero sections */
+.hero-section .btn-secondary,
+.hero-section-home2 .btn-secondary,
+.hero-split .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.hero-section .btn-secondary:hover,
+.hero-section-home2 .btn-secondary:hover,
+.hero-split .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+/* 5) Spacing between hero subtitle text and actions buttons */
+.hero-subtitle {
+  margin-bottom: 2.5rem !important;
+}
+
+/* 7) Align RTL and theme toggles in register/login pages on mobile (prevents overlapping) */
+@media (max-width: 768px) {
+  .auth-form-side {
+    padding-top: 6.5rem !important;
+  }
+}
+
+/* 8) Align navigation bar properly at 1024px (tablet landscape) */
+@media (max-width: 1200px) and (min-width: 993px) {
+  .nav-links {
+    gap: 1.25rem;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+  }
+  .nav-actions {
+    gap: 0.75rem;
+  }
+  .nav-actions .btn {
+    padding: 0.6rem 1.15rem;
+    font-size: 0.875rem;
+  }
+  .toggle-btn {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* Align mobile view properly - increase breakpoint to 992px to switch to hamburger drawer */
+@media (max-width: 992px) {
+  .nav-links, .nav-actions .btn {
+    display: none !important;
+  }
+  .hamburger-menu {
+    display: flex !important;
+  }
+}
+
+/* 10, 11, 12, 13, 14) Align odd/last cards to the center at 1024px */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* For 3-card grids */
+  .grid-3 > *:nth-child(3):last-child {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: 100%;
+    max-width: calc(50% - 1.25rem);
+  }
+  
+  /* For 4-card grids */
+  .grid-4 > *:nth-child(4):last-child {
+    grid-column: 1 / span 3;
+    justify-self: center;
+    width: 100%;
+    max-width: calc((100% - 4rem) / 3);
+  }
+  
+  .workflow-grid > *:nth-child(4):last-child {
+    grid-column: 1 / span 3;
+    justify-self: center;
+    width: 100%;
+    max-width: calc((100% - 5rem) / 3);
+  }
+  
+  /* Hide workflow step arrows to prevent misalignment */
+  .workflow-step::after {
+    display: none !important;
+  }
+}
+
+/* 15) Mobile/tablet logo inside auth glass card */
+.mobile-logo {
+  display: none !important;
+}
+
+@media (max-width: 992px) {
+  .mobile-logo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text) !important;
+    margin-bottom: 2rem;
+  }
+}
+
