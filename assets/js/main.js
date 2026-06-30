@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initPasswordStrength();
   initCharts();
   init3DTilt();
+  initNavHighlight();
+  initScrollToTop();
 });
 
 /* ==========================================================================
@@ -541,4 +543,84 @@ function init3DTilt() {
       shimmer.style.background = 'transparent';
     });
   });
+}
+
+/* ==========================================================================
+   13. ACTIVE NAVIGATION LINK HIGHLIGHTING
+   ========================================================================== */
+function initNavHighlight() {
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  
+  // Highlighting desktop nav links
+  const desktopLinks = document.querySelectorAll('.nav-links a');
+  desktopLinks.forEach(link => {
+    const linkPath = link.getAttribute('href');
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+
+  // Highlighting mobile drawer links
+  const mobileLinks = document.querySelectorAll('.mobile-drawer-links a');
+  mobileLinks.forEach(link => {
+    const linkPath = link.getAttribute('href');
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+/* ==========================================================================
+   14. DYNAMIC SCROLL-TO-TOP BUTTONS
+   ========================================================================== */
+function initScrollToTop() {
+  // 1. Create and inject floating scroll to top button
+  const btn = document.createElement('button');
+  btn.id = 'scrollToTopBtn';
+  btn.className = 'scroll-to-top-btn';
+  btn.setAttribute('aria-label', 'Scroll to Top');
+  btn.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px; height:20px;">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  `;
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // 2. Create and inject footer back-to-top text button
+  const footerContainer = document.querySelector('.site-footer .container');
+  if (footerContainer) {
+    const scrollUpDiv = document.createElement('div');
+    scrollUpDiv.className = 'footer-scroll-up';
+    scrollUpDiv.innerHTML = `
+      <button class="footer-scroll-btn" aria-label="Scroll to top">
+        <span>Back to Top</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px; height:16px;">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+    `;
+    scrollUpDiv.querySelector('button').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    footerContainer.appendChild(scrollUpDiv);
+  }
 }
