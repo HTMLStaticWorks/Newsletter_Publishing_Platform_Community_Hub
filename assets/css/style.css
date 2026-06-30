@@ -900,13 +900,16 @@ html[dir="rtl"] .mobile-drawer.open {
   gap: 5rem;
   animation: marquee-scroll 25s linear infinite;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .marquee-content svg {
-  height: 35px;
+  height: 40px;
+  width: 160px;
   fill: var(--color-muted);
   opacity: 0.65;
   transition: opacity var(--transition-fast), fill var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .marquee-content svg:hover {
@@ -1344,4 +1347,16 @@ html[dir="rtl"] .auth-floating-actions {
   .auth-glass-card {
     padding: 2rem 1.25rem !important;
   }
+}
+
+/* Ensure hero sections with background images have high text contrast in all modes */
+.hero-section h1,
+.hero-section-home2 h1,
+.hero-section-home2 .hero-heading-large {
+  color: #FFFFFF !important;
+}
+
+.hero-section p,
+.hero-section-home2 p {
+  color: rgba(255, 255, 255, 0.85) !important;
 }
