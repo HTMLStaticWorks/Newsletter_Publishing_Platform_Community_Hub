@@ -420,7 +420,7 @@ p {
 .nav-link {
   font-weight: var(--fw-nav);
   font-size: 0.95rem;
-  color: #334155;
+  color: var(--color-text);
   position: relative;
   padding-block: 0.25rem;
 }
@@ -1377,7 +1377,7 @@ html[dir="rtl"] .auth-floating-actions {
   .hero-section,
   .hero-section-home2,
   .hero-split {
-    padding-top: 9.5rem !important;
+    padding-top: 6.5rem !important;
   }
 }
 
@@ -1385,7 +1385,7 @@ html[dir="rtl"] .auth-floating-actions {
   .hero-section,
   .hero-section-home2,
   .hero-split {
-    padding-top: 8.5rem !important;
+    padding-top: 5.5rem !important;
   }
 }
 

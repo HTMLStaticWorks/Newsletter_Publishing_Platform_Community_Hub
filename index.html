@@ -116,13 +116,16 @@
     }
     .stats-grid {
       margin-top: 4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2.5rem;
       text-align: center;
     }
     .stat-card {
       padding: 1.5rem;
+      flex: 1 1 220px;
+      max-width: 280px;
     }
     .stat-number {
       font-size: 3rem;
